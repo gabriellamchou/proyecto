@@ -37,8 +37,7 @@ public class SecurityConfig {
                 .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
         http.authorizeHttpRequests(
                 auth -> auth
-                        .requestMatchers("/public/tutorial").permitAll()
-                        .requestMatchers("/public/**").hasRole("ADMIN")
+                        .requestMatchers("/public/**").permitAll()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                         .permitAll()
                         .anyRequest().authenticated())

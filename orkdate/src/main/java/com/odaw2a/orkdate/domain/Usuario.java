@@ -10,7 +10,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-
 @Data
 @EqualsAndHashCode(of = "id")
 @AllArgsConstructor
