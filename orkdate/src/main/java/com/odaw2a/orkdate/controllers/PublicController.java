@@ -47,6 +47,11 @@ public class PublicController {
     public String showLogin() {
         return "public/loginView";
     }
+
+    @GetMapping("/logout")
+    public String showLogout() {
+        return "redirect:/public/login";
+    }
     
 
 }

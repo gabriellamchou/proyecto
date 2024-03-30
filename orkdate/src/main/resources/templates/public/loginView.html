@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
+
 <body>
     <h3>Acceso</h3>
-    <form class="form">
-        <label for="tlfAccess">Teléfono<br>
-            <input type="tel" id="tlfAccess" required>
+    <div th:if="${param.error}">Credenciales incorrectas</div>
+    <div th:if="${param.logout}">Te has desconectado</div>
+    <form class="form" th:action="@{/login}" method="post">
+        <label for="username">Nombre<br>
+            <input type="text" name="username" id="username" required />
         </label>
         <br>
-        <label for="claveAccess">Clave<br>
-            <input type="password" id="claveAccess" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,}" required title="La contraseña debe tener al menos 7 caracteres, que incluyan al menos un número, 
-            mayúsculas y minúsculas">
+        <label for="password">Contraseña<br>
+            <input type="password" name="password" id="password" required />
         </label>
-        <button type="submit" class="boton">Entrar</button>
+        <input type="submit" class="boton" />
     </form>
 </body>
+
 </html>

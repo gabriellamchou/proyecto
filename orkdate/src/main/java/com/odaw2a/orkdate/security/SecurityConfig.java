@@ -42,10 +42,13 @@ public class SecurityConfig {
                         .permitAll()
                         .anyRequest().authenticated())
                 .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer
+                        .loginPage("/public/login")
+                        .loginProcessingUrl("/login")
+                        .failureUrl("/public/login?error")
                         .defaultSuccessUrl("/public/tutorial", true)
                         .permitAll())
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/login")
+                        .logoutSuccessUrl("/public/login?logout")
                         .permitAll())
                 // .csrf(csrf -> csrf.disable())
                 .httpBasic(Customizer.withDefaults());
