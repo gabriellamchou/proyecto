@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h3>Acceso</h3>
+    <form class="form">
+        <label for="tlfAccess">Teléfono<br>
+            <input type="tel" id="tlfAccess" required>
+        </label>
+        <br>
+        <label for="claveAccess">Clave<br>
+            <input type="password" id="claveAccess" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,}" required title="La contraseña debe tener al menos 7 caracteres, que incluyan al menos un número, 
+            mayúsculas y minúsculas">
+        </label>
+        <button type="submit" class="boton">Entrar</button>
+    </form>
+</body>
+</html>
