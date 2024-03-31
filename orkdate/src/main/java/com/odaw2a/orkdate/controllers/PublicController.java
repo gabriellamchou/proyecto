@@ -27,10 +27,10 @@ public class PublicController {
         return "public/tutorialView";
     }
 
-    @GetMapping("/registro")
+    @GetMapping({"/registro", "/login"})
     public String showRegistro(@RequestParam(required = false) Integer err, Model model) {
         model.addAttribute("registroForm", new Usuario());
-        return "public/registroView";
+        return "public/loginView";
     }
 
     @PostMapping("/registro/submit")
@@ -41,11 +41,6 @@ public class PublicController {
         registroForm.setRol(Rol.USUARIO);
         usuarioService.añadir(registroForm);
         return "redirect:/public/login";
-    }
-
-    @GetMapping("/login")
-    public String showLogin() {
-        return "public/loginView";
     }
 
     @GetMapping("/logout")
