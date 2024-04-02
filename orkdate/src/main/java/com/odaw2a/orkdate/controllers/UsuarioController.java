@@ -6,13 +6,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.odaw2a.orkdate.domain.Usuario;
 import com.odaw2a.orkdate.dtos.UsernameDto;
 import com.odaw2a.orkdate.services.UsuarioService;
+import com.odaw2a.orkdate.utilities.Params;
 
 import jakarta.validation.Valid;
 
@@ -25,7 +28,10 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @GetMapping("/mis-datos")
-    public String showMisDatos(Model model) {
+    public String showMisDatos(@RequestParam(required = false) Integer msg, Model model) {
+        if (msg != null) {
+            model.addAttribute("msg", Params.USERMSG[msg]);
+        }
         Usuario currentUser = usuarioService.getCurrentUser();
         UsernameDto usernameDtoForm = usuarioService.convertUsuarioToUsernameDto(currentUser);
         model.addAttribute("user", currentUser);
@@ -34,11 +40,19 @@ public class UsuarioController {
     }
 
     @PostMapping("/cambiar-username/submit")
-    public String processUsernameChange(@Valid UsernameDto usernameDtoForm) {
+    public String processUsernameChange(@Valid UsernameDto usernameDtoForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/usuario/mis-datos?msg=0";
+        }
+        
         // Cambiar el nombre de usuario en la base de datos
         Usuario currentUser = usuarioService.getCurrentUser();
         currentUser.setUsername(usernameDtoForm.getUsername());
-        usuarioService.editar(currentUser);
+        try {
+            usuarioService.editar(currentUser);
+        } catch (Exception e) {
+            return "redirect:/usuario/mis-datos?msg=0";
+        }
 
         // Actualizar el principal de autenticación en la sesión del usuario
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -47,6 +61,8 @@ public class UsuarioController {
             auth.getCredentials(), 
             auth.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(newAuth);
+
+        // Devolver vista con parámetro username para indicar éxito en el cambio
         return "redirect:/usuario/mis-datos?username";
     }
 

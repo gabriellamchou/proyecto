@@ -23,7 +23,8 @@
             <button type="submit">Modificar</button>
         </form>
     </div>
-    <div th:if="${param.username}">Nombre de usuario modificado con éxito</div>
+    <div th:if="${param.username}"><p>Nombre de usuario modificado con éxito</p></div>
+    <div><p th:text="${msg}"></p></div>
 </body>
 
 </html>

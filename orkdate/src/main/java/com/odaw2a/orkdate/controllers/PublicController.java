@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.odaw2a.orkdate.domain.Rol;
 import com.odaw2a.orkdate.domain.Usuario;
+import com.odaw2a.orkdate.exceptions.InvalidUserDataException;
 import com.odaw2a.orkdate.services.UsuarioService;
+import com.odaw2a.orkdate.utilities.Params;
 
 import jakarta.validation.Valid;
 
@@ -28,7 +30,10 @@ public class PublicController {
     }
 
     @GetMapping({"/registro", "/login"})
-    public String showRegistro(@RequestParam(required = false) Integer err, Model model) {
+    public String showRegistro(@RequestParam(required = false) Integer msg, Model model) {
+        if (msg != null) {
+            model.addAttribute("msg", Params.USERMSG[msg]);
+        }
         model.addAttribute("registroForm", new Usuario());
         return "public/loginView";
     }
@@ -36,11 +41,15 @@ public class PublicController {
     @PostMapping("/registro/submit")
     public String processRegistro(@Valid Usuario registroForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/public/registro?err=0";
+            return "redirect:/public/registro?msg=1";
         }
         registroForm.setRol(Rol.USUARIO);
-        usuarioService.añadir(registroForm);
-        return "redirect:/public/login";
+        try {
+            usuarioService.añadir(registroForm);
+        } catch (InvalidUserDataException e) {
+            return "redirect:/public/registro?msg=1";
+        }
+        return "redirect:/public/login?msg=2";
     }
 
     @GetMapping("/logout")
@@ -48,5 +57,4 @@ public class PublicController {
         return "redirect:/public/login";
     }
     
-
 }
