@@ -10,6 +10,7 @@
       <div class="dropdown">
         <button id="userButton" class="dropbtn"><span id="spanUsername" sec:authentication="name"></span></button>
         <div id="userDropdown" class="dropdown-content">
+          <button><a th:href="@{/usuario/mis-datos}">Mis Datos</a></button>
           <form th:action="@{/logout}" method="post">
             <button type="submit">Cerrar Sesión</button>
           </form>
