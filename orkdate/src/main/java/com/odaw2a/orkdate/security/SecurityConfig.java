@@ -38,6 +38,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(
                 auth -> auth
                         .requestMatchers("/public/**").permitAll()
+                        .requestMatchers("/usuario/**").authenticated()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                         .permitAll()
                         .anyRequest().authenticated())

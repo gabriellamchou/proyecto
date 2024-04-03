@@ -19,11 +19,33 @@
             method="post"
         >
             <label for="username">Nombre de usuario:</label>
-            <input type="text" id="username" th:value="${user.username}" th:field="*{username}">
+            <input type="text" id="username" th:field="*{username}">
             <button type="submit">Modificar</button>
         </form>
     </div>
     <div th:if="${param.username}"><p>Nombre de usuario modificado con éxito</p></div>
+    <div>
+        <form 
+            th:action="@{/usuario/cambiar-password/submit}" 
+            th:object="${passwordDtoForm}" 
+            method="post"
+        >
+            <label for="passwordNew">Nueva Contraseña:</label>
+            <input type="password" id="passwordNew"><br>
+            <label for="passwordCheck">Confirma la nueva Contraseña:</label>
+            <input type="password" id="passwordCheck" th:field="*{password}">
+            <button type="submit">Modificar</button>
+        </form>
+    </div>
+    <div>
+        <form 
+            th:action="@{/usuario/borrar-usuario/submit}"
+            method="post"
+        >
+            <p>Borrar cuenta</p>
+            <button type="submit">Borrar</button>
+        </form>
+    </div>
     <div><p th:text="${msg}"></p></div>
 </body>
 

@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.odaw2a.orkdate.domain.Usuario;
+import com.odaw2a.orkdate.dtos.PasswordDto;
 import com.odaw2a.orkdate.dtos.UsernameDto;
 import com.odaw2a.orkdate.exceptions.InvalidUserDataException;
 import com.odaw2a.orkdate.repositories.UsuarioRespository;
@@ -38,11 +39,17 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     public Usuario editar(Usuario usuario) throws InvalidUserDataException {
+        String passCrypted = passwordEncoder.encode(usuario.getPassword());
+        usuario.setPassword(passCrypted);
         try {
             return usuarioRepository.save(usuario);
         } catch (DataIntegrityViolationException e) {
             throw new InvalidUserDataException();
         } 
+    }
+
+    public void borrar(Usuario usuario) {
+            usuarioRepository.delete(usuario);
     }
 
     public Usuario getCurrentUser() {
@@ -57,6 +64,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     public UsernameDto convertUsuarioToUsernameDto(Usuario usuario) {
         return modelMapper.map(usuario, UsernameDto.class);
+    }
+
+    public PasswordDto convertUsuarioToPasswordDto(Usuario usuario) {
+        return modelMapper.map(usuario, PasswordDto.class);
     }
 
 }
