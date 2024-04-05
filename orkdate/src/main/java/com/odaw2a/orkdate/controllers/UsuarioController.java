@@ -20,8 +20,6 @@ import com.odaw2a.orkdate.utilities.Params;
 
 import jakarta.validation.Valid;
 
-
-
 @Controller
 @RequestMapping("/usuario")
 
@@ -95,5 +93,4 @@ public class UsuarioController {
         return "redirect:/public/registro";
     }
     
-
 }

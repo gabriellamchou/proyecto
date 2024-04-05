@@ -8,4 +8,8 @@ public class Params {
         "La nueva contraseña no es válida",
         "Contraseña modificada con éxito"
     };
+
+    public static final String [] CHARMSG = {
+        ""
+    };
 }
