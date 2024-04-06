@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+<body>
+  <nav th:fragment="navFragment">
+    <ul sec:authorize="!isAuthenticated()">
+      <li><button><a th:href="@{/public/registro}">Regístrate</a></button></li>
+      <li><button><a th:href="@{/public/tutorial}">Tutorial</a></button></li>
+    </ul>
+    <ul sec:authorize="isAuthenticated()">
+      <li><button><a th:href="@{/personaje/list}">Mis Personajes</a></button></li>
+      <li><button><a th:href="@{/public/tutorial}">Tutorial</a></button></li>
+    </ul>
+  </nav>
+</body>
+
+</html>

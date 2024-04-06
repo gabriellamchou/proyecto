@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Personaje</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="/js/header.js" defer></script>
 </head>
 
 <body>
+    <header th:replace="~{/fragments/headerFragment.html::headerFragment}"></header>
+    <nav th:replace="~{/fragments/navFragment.html::navFragment}"></nav>
     <h2>Editar Personaje</h2>
     <form 
         th:action="@{/personaje/editar/submit}" 
