@@ -21,7 +21,13 @@ public class PersonajeServiceImpl implements PersonajeService {
         return personajeRespository.findByUsuario(usuario);
     }
 
-    public Personaje añadir(Personaje personaje) throws InvalidUserDataException {
+    public Personaje obtenerPorId(Long id) throws InvalidUserDataException {
+        Personaje personaje = personajeRespository.findById(id).orElseThrow();
+        return personaje;
+    }
+
+    public Personaje añadir(Personaje personaje, Usuario usuario) throws InvalidUserDataException {
+        personaje.setUsuario(usuario);
         try {
             return personajeRespository.save(personaje);
         } catch (DataIntegrityViolationException e) {
@@ -37,8 +43,8 @@ public class PersonajeServiceImpl implements PersonajeService {
         }
     }
 
-    public void borrar(Personaje personaje) {
-        personajeRespository.delete(personaje);
+    public void borrar(Long id) throws InvalidUserDataException {
+        personajeRespository.deleteById(id);;
     }
 
 }

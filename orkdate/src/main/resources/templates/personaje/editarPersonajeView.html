@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Personaje</title>
+</head>
+
+<body>
+    <h2>Editar Personaje</h2>
+    <form 
+        th:action="@{/personaje/editar/submit}" 
+        th:object="${personajeForm}" 
+        method="post"
+    >
+        <input type="text" th:field="*{id}" hidden>
+        <input type="text" th:field="*{usuario}" hidden>
+        <label for="nombre">Nombre: </label>
+        <input type="text" id="nombre" th:field="*{nombre}"><br>
+        <label for="apariencia">Apariencia: </label>
+        <input type="text" id="apariencia" th:field="*{apariencia}"><br>
+        <label for="descripcion">Descripción: </label>
+        <textarea id="descripcion" rows="5" th:field="*{descripcion}"></textarea><br>
+        <button type="submit">Editar</button>
+    </form>
+    <div><p th:text="${msg}"></p></div>
+</body>
+
+</html>

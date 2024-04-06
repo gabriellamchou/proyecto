@@ -49,7 +49,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     public void borrar(Usuario usuario) {
-            usuarioRepository.delete(usuario);
+        usuarioRepository.delete(usuario);
     }
 
     public Usuario getCurrentUser() {

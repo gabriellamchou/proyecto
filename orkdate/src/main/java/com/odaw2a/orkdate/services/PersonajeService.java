@@ -13,10 +13,12 @@ public interface PersonajeService {
 
     public List<Personaje> obtenerTodos(Usuario usuario);
 
-    public Personaje añadir(Personaje personaje)  throws InvalidUserDataException;
+    public Personaje obtenerPorId(Long id) throws InvalidUserDataException;
+
+    public Personaje añadir(Personaje personaje, Usuario usuario)  throws InvalidUserDataException;
 
     public Personaje editar(Personaje personaje)  throws InvalidUserDataException;
 
-    public void borrar(Personaje personaje);
+    public void borrar(Long id) throws InvalidUserDataException;
 
 }

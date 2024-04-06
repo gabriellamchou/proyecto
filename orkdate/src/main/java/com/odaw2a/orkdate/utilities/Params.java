@@ -10,6 +10,10 @@ public class Params {
     };
 
     public static final String [] CHARMSG = {
-        ""
+        "Personaje creado con éxito",
+        "Los datos introducidos no son válidos",
+        "El personaje seleccionado no existe",
+        "Personaje editado con éxito",
+        "Personaje elminado con éxito",
     };
 }

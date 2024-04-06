@@ -28,11 +28,11 @@ public class Main {
 			usuarioService.añadir(user1);
 
 			Personaje adminChar1 = new Personaje(null, "adminChar1", "Mago", "Es un istar, uno de los espíritus maia enviados a la Tierra Media durante la Tercera Edad del Sol para ayudar a sus habitantes en la lucha contra el «señor oscuro» Sauron.", admin);
-			personajeService.añadir(adminChar1);
+			personajeService.añadir(adminChar1, admin);
 			Personaje adminChar2 = new Personaje(null, "adminChar2", "Ladrón", "Frodo pasó su infancia en Casa Brandi, en Los Gamos, viviendo con la familia de su madre. Los padres de Frodo murieron cuando él tenía doce años, en un accidente mientras navegaban en un bote.", admin);
-			personajeService.añadir(adminChar2);
+			personajeService.añadir(adminChar2, admin);
 			Personaje user1Char = new Personaje(null, "user1Char", "Bárbaro", "Hijo de un herrero de las tierras norteñas de Cimmeria, nació en un campo de batalla. A la edad de tan solo quince años tomó parte en el saqueo de Venarium, y poco después se unió a una banda de Aesir.", user1);
-			personajeService.añadir(user1Char);
+			personajeService.añadir(user1Char, user1);
 		};
 	}
 
