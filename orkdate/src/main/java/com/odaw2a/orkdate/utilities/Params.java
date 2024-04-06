@@ -14,6 +14,6 @@ public class Params {
         "Los datos introducidos no son válidos",
         "El personaje seleccionado no existe",
         "Personaje editado con éxito",
-        "Personaje elminado con éxito",
+        "Personaje eliminado con éxito",
     };
 }

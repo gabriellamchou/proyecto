@@ -74,10 +74,6 @@ public class PersonajeController {
         } catch (InvalidUserDataException e) {
             return "redirect:/personaje/list?msg=2";
         }
-        Usuario currentUser = usuarioService.getCurrentUser();
-        if (!personajeForm.getUsuario().equals(currentUser)) {
-            return "redirect:/personaje/list?msg=2";
-        }
         model.addAttribute("personajeForm", personajeForm);
         return "/personaje/editarPersonajeView";
     }
@@ -97,16 +93,6 @@ public class PersonajeController {
     
     @PostMapping("/borrar/{id}")
     public String processDeletePersonaje(@PathVariable Long id) {
-        Personaje personaje;
-        try {
-            personaje = personajeService.obtenerPorId(id);
-        } catch (InvalidUserDataException e) {
-            return "redirect:/personaje/list?msg=2";
-        }
-        Usuario currentUser = usuarioService.getCurrentUser();
-        if (!personaje.getUsuario().equals(currentUser)) {
-            return "redirect:/personaje/list?msg=2";
-        }
         try {
             personajeService.borrar(id);
         } catch (InvalidUserDataException e) {

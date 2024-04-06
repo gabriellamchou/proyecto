@@ -16,6 +16,8 @@ public class PersonajeServiceImpl implements PersonajeService {
 
     @Autowired
     PersonajeRespository personajeRespository;
+    @Autowired
+    UsuarioService usuarioService;
 
     public List<Personaje> obtenerTodos(Usuario usuario) {
         return personajeRespository.findByUsuario(usuario);
@@ -36,6 +38,10 @@ public class PersonajeServiceImpl implements PersonajeService {
     }
 
     public Personaje editar(Personaje personaje) throws InvalidUserDataException {
+        Usuario currentUser = usuarioService.getCurrentUser();
+        if (!personaje.getUsuario().equals(currentUser)) {
+            throw new InvalidUserDataException();
+        }
         try {
             return personajeRespository.save(personaje);
         } catch (DataIntegrityViolationException e) {
@@ -44,7 +50,12 @@ public class PersonajeServiceImpl implements PersonajeService {
     }
 
     public void borrar(Long id) throws InvalidUserDataException {
-        personajeRespository.deleteById(id);;
+        Personaje personaje = this.obtenerPorId(id);
+        Usuario currentUser = usuarioService.getCurrentUser();
+        if (personaje == null || !personaje.getUsuario().equals(currentUser)) {
+            throw new InvalidUserDataException();
+        }
+        personajeRespository.delete(personaje);
     }
 
 }
