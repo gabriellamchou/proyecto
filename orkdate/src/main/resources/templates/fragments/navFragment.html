@@ -8,6 +8,7 @@
       <li><button><a th:href="@{/public/tutorial}">Tutorial</a></button></li>
     </ul>
     <ul sec:authorize="isAuthenticated()">
+      <li><button><a th:href="@{/cantina}">Cantina</a></button></li>
       <li><button><a th:href="@{/personaje/list}">Mis Personajes</a></button></li>
       <li><button><a th:href="@{/public/tutorial}">Tutorial</a></button></li>
     </ul>

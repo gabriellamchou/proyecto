@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cantina</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="/js/header.js" defer></script>
+</head>
+
+<body>
+    <header th:replace="~{/fragments/headerFragment.html::headerFragment}"></header>
+    <nav th:replace="~{/fragments/navFragment.html::navFragment}"></nav>
+    <h1>La Cantina</h1>
+    <table>
+        <thead>
+            <th>Usuario</th>
+            <!-- <th>Personaje</th>
+            <th>Apariencia</th>
+            <th>Descripción</th> -->
+        </thead>
+        <tbody>
+            <tr th:each="usuario : ${listaUsuarios}">
+                <td th:text="${usuario.username}"></td>
+                <!-- <td th:text="${personaje.nombre}"></td>
+                <td th:text="${personaje.apariencia}"></td>
+                <td th:text="${personaje.descripcion}"></td> -->
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+    <button>Pass</button><button>Like</button>
+    <br><br>
+    <a th:href="@{/cantina?pag=0}">Pág. inicial</a>&nbsp;|&nbsp;
+    <a th:href="@{/cantina(pag=${pagAnterior})}">Pág. anterior</a>&nbsp;|&nbsp;
+    <a th:href="@{/cantina(pag=${pagSiguiente})}">Pág. siguiente</a>&nbsp;|&nbsp;
+    <a th:href="@{/cantina(pag=${pagFinal})}">Pág. final</a>
+</body>
+
+</html>

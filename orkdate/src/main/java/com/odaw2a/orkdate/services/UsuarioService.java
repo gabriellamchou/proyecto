@@ -1,5 +1,7 @@
 package com.odaw2a.orkdate.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.odaw2a.orkdate.domain.Usuario;
@@ -17,6 +19,10 @@ public interface UsuarioService {
     public void borrar(Usuario usuario);
     
     public Usuario getCurrentUser();
+
+    public List<Usuario> obtenerPerfilesPaginados(Integer pageNum);
+
+    public Integer getTotalPaginas();
 
     public UsernameDto convertUsuarioToUsernameDto(Usuario usuario);
 

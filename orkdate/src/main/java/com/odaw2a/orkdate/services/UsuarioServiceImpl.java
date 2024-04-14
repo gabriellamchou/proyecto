@@ -1,8 +1,13 @@
 package com.odaw2a.orkdate.services;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +29,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     ModelMapper modelMapper;
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    private final Integer pageSize = 1;
 
     public Usuario añadir(Usuario usuario) throws InvalidUserDataException {
         if (usuario.getPassword().length() < 4 || usuario.getPassword().length() > 15) {
@@ -60,6 +67,22 @@ public class UsuarioServiceImpl implements UsuarioService {
         } else {
             return null;
         }
+    }
+
+    public List<Usuario> obtenerPerfilesPaginados(Integer pageNum) {
+        Pageable paging = PageRequest.of(pageNum, pageSize);
+        Page<Usuario> pagedResult = usuarioRepository.findAll(paging);
+        if (pagedResult.hasContent()) {
+            return pagedResult.getContent();
+        } else {
+            return null;
+        }
+    }
+
+    public Integer getTotalPaginas() {
+        Pageable paging = PageRequest.of(0, pageSize);
+        Page<Usuario> pagedResult = usuarioRepository.findAll(paging);
+        return pagedResult.getTotalPages();
     }
 
     public UsernameDto convertUsuarioToUsernameDto(Usuario usuario) {
