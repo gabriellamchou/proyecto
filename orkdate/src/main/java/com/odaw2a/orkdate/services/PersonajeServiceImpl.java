@@ -28,6 +28,14 @@ public class PersonajeServiceImpl implements PersonajeService {
         return personaje;
     }
 
+    public List<Personaje> obtenerPorUsuario(Usuario usuario) throws InvalidUserDataException {
+        List<Personaje> listaPersonajes = personajeRespository.findByUsuario(usuario);
+        if (listaPersonajes.isEmpty()) {
+            throw new InvalidUserDataException();
+        }
+        return listaPersonajes;
+    }
+
     public Personaje añadir(Personaje personaje, Usuario usuario) throws InvalidUserDataException {
         personaje.setUsuario(usuario);
         try {

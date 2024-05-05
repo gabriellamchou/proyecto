@@ -15,6 +15,8 @@ public interface PersonajeService {
 
     public Personaje obtenerPorId(Long id) throws InvalidUserDataException;
 
+    public List<Personaje> obtenerPorUsuario(Usuario usuario) throws InvalidUserDataException;
+
     public Personaje añadir(Personaje personaje, Usuario usuario)  throws InvalidUserDataException;
 
     public Personaje editar(Personaje personaje)  throws InvalidUserDataException;

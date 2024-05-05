@@ -20,9 +20,7 @@ public interface UsuarioService {
     
     public Usuario getCurrentUser();
 
-    public List<Usuario> obtenerPerfilesPaginados(Integer pageNum);
-
-    public Integer getTotalPaginas();
+    public List<Usuario> findAllButCurrent();
 
     public UsernameDto convertUsuarioToUsernameDto(Usuario usuario);
 
