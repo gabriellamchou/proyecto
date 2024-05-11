@@ -54,6 +54,10 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioRepository.delete(usuario);
     }
 
+    public Usuario obtenerPorId(Long id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
+
     public Usuario getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {

@@ -30,7 +30,11 @@
     </table>
     <br><br>
     <button id="passButton"><a th:href="@{/cantina(u=${usuarioSiguiente})}">Pass</a></button>
-    <button id="likeButton"><a th:href="@{/cantina(u=${usuarioSiguiente})}">Like</a></button>
+    <form 
+        th:action="@{/cantina/like(uid=${usuarioCantina.id}, usig=${usuarioSiguienteIdx})}"
+        method="post">
+        <button id="likeButton" type="submit">Like</button>
+    </form>
 </body>
 
 </html>

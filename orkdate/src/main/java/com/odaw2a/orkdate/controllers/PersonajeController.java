@@ -21,10 +21,6 @@ import com.odaw2a.orkdate.utilities.Params;
 
 import jakarta.validation.Valid;
 
-
-
-
-
 @Controller
 @RequestMapping("/personaje")
 public class PersonajeController {

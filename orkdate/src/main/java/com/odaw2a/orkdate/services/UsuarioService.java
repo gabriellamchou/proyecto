@@ -20,6 +20,8 @@ public interface UsuarioService {
     
     public Usuario getCurrentUser();
 
+    public Usuario obtenerPorId(Long id);
+
     public List<Usuario> findAllButCurrent();
 
     public UsernameDto convertUsuarioToUsernameDto(Usuario usuario);
